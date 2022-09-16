@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { appRoutingProviders, routing } from './app.routing';
@@ -19,6 +20,7 @@ import { TitleComponent } from './components/title/title.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     routing,
     ReactiveFormsModule,
   ],
