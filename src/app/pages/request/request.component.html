@@ -1,0 +1,73 @@
+<app-title title="¡Haz tu pedido!"></app-title>
+<div class="container">
+    <div class="row"
+         style="margin-top: 20px;">
+        <div class="col-12 col-md-8" style="margin-bottom: 15px;">
+            <h2>Bocadillos</h2>
+            <ul class="list-group">
+                <li class="list-group-item"
+                    *ngFor="let product of productsByCategory['Bocadillos']; index as i">
+                    <app-order-product [product]="product"
+                                       [showDetails]="true"
+                                       (selectProduct)="onSelectProduct($event)"
+                                       [allowAdd]="true"></app-order-product>
+                </li>
+            </ul>
+        </div>
+        <div class="col-12 col-md-4"
+             style="padding-left: 20px;">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Resumen</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item"
+                            *ngFor="let product of selectedProducts; index as i">
+                            <app-order-product [product]="product"
+                                               [index]="i"
+                                               [showDetails]="false"
+                                               (removeProduct)="onRemoveProduct($event)"
+                                               [allowRemove]="true"></app-order-product>
+                        </li>
+                        <li class="list-group-item"
+                            *ngIf="selectedProducts.length === 0">No hay productos seleccionados</li>
+                    </ul>
+                    <ul class="list-group"
+                        style="margin-top: 10px;">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col"><strong>TOTAL</strong></div>
+                                <div class="col"><strong style="float: right;">{{total}} €</strong></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <button *ngIf="selectedProducts.length > 0"
+                            type="button"
+                            name="confirm"
+                            class="btn btn-outline-primary"
+                            (click)="onClickHandler($event)"
+                            style="float: right; margin-top: 10px;">Confirmar Pedido
+                    </button>
+                </div>
+                <div class="col-12"
+                     style="padding-top: 15px;">
+                    <h2>Pedidos anteriores</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item"
+                            *ngFor="let order of historicOrders; index as i">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5><strong>{{order.id}}</strong></h5>
+                                </div>
+                                <div class="col-4">
+                                    <span class="badge rounded-pill text-bg-primary">{{order.total}} €</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item"
+                            *ngIf="historicOrders.length === 0">No se han encontrado pedidos anteriores</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

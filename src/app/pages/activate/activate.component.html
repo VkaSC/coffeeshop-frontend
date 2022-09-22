@@ -1,0 +1,13 @@
+<app-title title="Acticación de Usuario"></app-title>
+<div class="container">
+    <div class="text-center" *ngIf="activating" style="padding-top: 20%;">
+        <div class="spinner-grow text-primary" role="status" style="width: 5rem; height: 5rem;">
+            <span class="visually-hidden">Activando Cuenta...</span>
+        </div>  
+        <h2>Activando Cuenta...</h2> 
+    </div>  
+    <div *ngIf="!activating" style="padding-top: 20%;" class="text-center">
+        <h2>El usuario no ha podido ser activado.</h2> 
+        <h4>El usuario no existe, no está autorizado para realizar esta operacion o ha ocurrido algun error.</h4>
+    </div> 
+</div>

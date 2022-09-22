@@ -2,14 +2,10 @@
     <nav class="navbar navbar-expand bg-primary container">
         <a class="navbar-brand"
            href="#"
-           style="font-size: 21px; padding-left: 20px; padding-bottom: 8px;"></a>
+           style="font-size: 21px; padding-left: 20px; padding-bottom: 8px;"><img width="35"
+                 src="../../../assets/img/ies_blanco.png"></a>
         <div class="container-fluid">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"
-                    style="font-size: 15px;">
-                    <a class="nav-link btn btn-lg"
-                       routerLink="/">Home</a>
-                </li>
                 <li class="nav-item"
                     style="font-size: 15px;">
                     <a class="nav-link btn btn-lg"
@@ -22,13 +18,24 @@
                 </li>
             </ul>
             <ul class="navbar-nav d-flex"
-                style="float: right;">
+                style="float: right;"
+                *ngIf="!authService.authorized">
                 <li class="nav-item"
                     style="font-size: 15px;">
                     <a class="nav-link btn btn-lg"
                        routerLink="/login">Iniciar Sesión</a>
                 </li>
             </ul>
+            <ul class="navbar-nav d-flex"
+                style="float: right;"
+                *ngIf="authService.authorized">
+                <li class="nav-item"
+                    style="font-size: 15px;">
+                    <a class="nav-link btn btn-lg"
+                       (click)="onClickHandler()">Cerrar Sesión</a>
+                </li>
+            </ul>
         </div>
     </nav>
+    <app-admin-bar *ngIf="authService.loggedUser?.type === 'Admin'"></app-admin-bar>
 </header>

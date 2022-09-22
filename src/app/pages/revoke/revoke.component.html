@@ -1,0 +1,13 @@
+<app-title title="Eliminación de Usuario"></app-title>
+<div class="container">
+    <div class="text-center" *ngIf="revoking" style="padding-top: 20%;">
+        <div class="spinner-grow text-primary" role="status" style="width: 5rem; height: 5rem;">
+            <span class="visually-hidden">Eliminado Usuario...</span>
+        </div>  
+        <h2>Eliminado Usuario...</h2> 
+    </div>  
+    <div *ngIf="!revoking" style="padding-top: 20%;" class="text-center">
+        <h2>El usuario no ha podido ser eliminado.</h2> 
+        <h4>El usuario no existe, no está autorizado para realizar esta operacion o ha ocurrido algun error.</h4>
+    </div> 
+</div>

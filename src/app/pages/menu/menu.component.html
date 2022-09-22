@@ -1,0 +1,51 @@
+<app-title title="Nuestra Carta"></app-title>
+<br />
+<br />
+<div class="container">
+    <div class="row"
+         id="cafes">
+        <div class="col-12 col-md-6"
+             style="padding-top: 15px;">
+            <h2>Cafés, Infusiones y Tes</h2>
+            <ul class="list-group">
+                <li class="list-group-item"
+                    *ngFor="let product of productsByCategory['Cafe']">
+                    <app-menu-product [product]="product"></app-menu-product>
+                </li>
+            </ul>
+        </div>
+        <div class="col-12 col-md-6"
+             style="padding-top: 15px;"
+             id="desayunos">
+            <h2>Desayunos</h2>
+            <ul class="list-group">
+                <li class="list-group-item"
+                    *ngFor="let product of productsByCategory['Desayunos']">
+                    <app-menu-product [product]="product"></app-menu-product>
+                </li>
+            </ul>
+        </div>
+        <div class="col-12 col-md-6"
+             style="padding-top: 15px;"
+             id="bocadillos">
+            <h2>Bocadillos</h2>
+            <ul class="list-group">
+                <li class="list-group-item"
+                    *ngFor="let product of productsByCategory['Bocadillos']">
+                    <app-menu-product [product]="product"></app-menu-product>
+                </li>
+            </ul>
+        </div>
+        <div class="col-12 col-md-6"
+             style="padding-top: 15px;"
+             id="zumos">
+            <h2>Refrescos, Zumos y otras bebidas</h2>
+            <ul class="list-group">
+                <li class="list-group-item"
+                    *ngFor="let product of productsByCategory['Bebidas']">
+                    <app-menu-product [product]="product"></app-menu-product>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

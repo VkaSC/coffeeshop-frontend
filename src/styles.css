@@ -5,6 +5,7 @@
     --accent-secondary: #b1eaff;
     --primary-light: #498d42;
     --dark-grey: #333333;
+    --darker-grey: #222222;
 }
 
 .nav-link {
@@ -15,8 +16,50 @@
     color: var(--accent-secondary) !important;
 }
 
+.link-accent{
+    color: var(--accent) !important;
+}
+
+.link-accent:hover{
+    color: var(--primary) !important;
+}
+
+.text-primary{
+    color: var(--primary) !important;
+}
+
 .bg-primary{
     background-color: var(--primary) !important;
+}
+
+.bg-secondary{
+    background-color: var(--secondary) !important;
+}
+
+.text-bg-primary {
+    background-color: var(--primary) !important;
+}
+
+.btn-primary {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+.btn-outline-primary {
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: black !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-secondary) !important;
+    border-color: var(--accent-secondary) !important;
+    color: black !important;
 }
 
 body, html {
@@ -39,7 +82,6 @@ body, html {
 }
 
 header{
-
     background-color: var(--primary);
     -webkit-box-shadow: 0px 6px 10px 0px rgba(0,0,0,0.64);
     -moz-box-shadow: 0px 6px 10px 0px rgba(0,0,0,0.64);
@@ -52,7 +94,7 @@ header{
 main {
     height: calc(100% - (51px + 50px));
     width: 100%;
-    background-color: var(--dark-grey);
+    /*background-color: var(--dark-grey);*/
     color: white;
     overflow-y: auto;
 }
@@ -68,14 +110,21 @@ footer {
     color: white;
 }
 
+.admin-bar {
+    background-color: var(--primary);
+    color: white;
+    position: relative;
+    z-index: 5;
+    border-top-width: 1px; 
+    border-top-style: solid;
+}
+
 .big-title {
-    height: 500px;
-    min-height: 500px;
-    max-height: 500px;
     background-color: var(--primary);
     color: white;
     padding-top: 15px;
     padding-left: 50px;
+    padding-bottom: 50px;
 }
 
 .title {
@@ -90,4 +139,45 @@ footer {
 
 .btn-accent {
     background-color: var(--secondary);
+}
+
+.list-group-item{
+    background-color: var(--dark-grey);
+    color: white;
+    vertical-align: middle;
+}
+
+.list-group-item-action:hover{
+    background-color: var(--darker-grey) !important;
+    color: white !important;
+}
+
+.form-control{
+    background-color: var(--dark-grey);
+    color: white;
+}
+
+.form-select {
+    background-color: var(--dark-grey);
+    color: white;
+}
+
+.form-control:focus{
+    background-color:var(--dark-grey);
+    color: white;
+}
+
+.form-select:focus {
+    background-color: var(--dark-grey);
+    color: white;
+}
+
+.form-control:read-only{
+    background-color: var(--darker-grey);
+    color: #f7f7f7;
+}
+
+.form-select:disabled {
+    background-color: var(--darker-grey);
+    color: #f7f7f7;
 }

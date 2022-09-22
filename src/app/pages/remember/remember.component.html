@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="w-100 m-auto"
+         style="max-width: 330px; margin-bottom: 20px;">
+        <form style="margin-top: 30px;"
+              [formGroup]="form">
+            <div class="text-center">
+                <img class="mb-4"
+                     src="../../../assets/img/ies_blanco.png"
+                     alt=""
+                     width="120">
+            </div>
+            <h1 class="h3 mb-3 fw-normal">Recordar Contraseña</h1>
+            <p>Escribe tu correo electrónico para que te podamos enviar una solicitud para establecer una nueva contraseña.</p>
+            <div class="form-floating">
+                <input type="email"
+                       class="form-control"
+                       placeholder="name@example.com"
+                       formControlName="email">
+                <label for="floatingInput">Correo Electrónico</label>
+                <div *ngIf="form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)"
+                     class="text-danger">
+                    <div *ngIf="form.controls.email.errors?.['required']">
+                        El Correo Electrónico es obligatorio.
+                    </div>
+                </div>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary mb-3 mt-3"
+                    [disabled]="form.invalid"
+                    (click)="onClickHandler()">Enviar</button>
+        </form>
+    </div>
+</div>
