@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class StorageService {
 
+  public static readonly DEVICE_ID = 'device_id';
+  public static readonly TOKEN = 'token';
+
   private localStorage: Storage;
   private sessionStorage: Storage;
 

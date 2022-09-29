@@ -1,4 +1,5 @@
 import { Utils } from "../libs/utils/utils.utils";
+import Allergen from "./allergen-model";
 
 export default class Product {
 
@@ -8,6 +9,7 @@ export default class Product {
     category: 'Cafe' | 'Desayunos' | 'Refrescos' | 'Bocadillos' = 'Cafe';
     details: string = '';
     price: number = 0;
+    allergens?: Allergen[] = []
 
     constructor(obj?: any){
         if(Utils.isObject(obj)){
@@ -17,6 +19,7 @@ export default class Product {
             this.category = obj.category;
             this.details = obj.details;
             this.price = obj.price;
+            this.allergens = obj.allergens;
         }
     }
 

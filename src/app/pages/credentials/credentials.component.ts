@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ERROR_STATUS, HTMLCodes } from 'src/app/models/httpResponse.model';
+import { ActivatedRoute, Params, Router, UrlSegment } from '@angular/router';
+import { StrUtils } from 'src/app/libs/utils/str.utils';
+import { HTMLCodes } from 'src/app/models/httpResponse.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -12,7 +13,9 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class CredentialsComponent implements OnInit {
 
+  title = 'Cambiar Contraseña';
   token?: string;
+  create: boolean = false;
 
   form = new FormGroup({
     password: new FormControl<string | null>('', Validators.required),
@@ -29,6 +32,15 @@ export class CredentialsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.url.subscribe((url: UrlSegment[]) => {
+      const result = url.filter(element => {
+        return StrUtils.containsIgnorecase(element.path, 'crear');
+      });
+      this.create = result.length > 0;
+      if (this.create) {
+        this.title = 'Establecer Contraseña';
+      }
+    });
     this.route.params.subscribe((params: Params) => {
       this.token = params['token'];
     });
@@ -59,8 +71,8 @@ export class CredentialsComponent implements OnInit {
           })
         } else {
           this.toastService.error({
-            header: 'Error iniciando sesión',
-            message: 'Ha ocurrido un error iniciando sesión. Inténtelo de nuevo más tarde.',
+            header: 'Error cambiando contraseña',
+            message: 'Ha ocurrido un error cambiando la contraseña. Inténtelo de nuevo más tarde.',
           });
         }
       });

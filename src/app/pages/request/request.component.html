@@ -2,7 +2,8 @@
 <div class="container">
     <div class="row"
          style="margin-top: 20px;">
-        <div class="col-12 col-md-8" style="margin-bottom: 15px;">
+        <div class="col-12 col-md-6"
+             style="margin-bottom: 15px;">
             <h2>Bocadillos</h2>
             <ul class="list-group">
                 <li class="list-group-item"
@@ -14,12 +15,12 @@
                 </li>
             </ul>
         </div>
-        <div class="col-12 col-md-4"
+        <div class="col-12 col-md-6"
              style="padding-left: 20px;">
             <div class="row">
                 <div class="col-12">
                     <h2>Resumen</h2>
-                    <ul class="list-group">
+                    <ul class="list-group list-fluid">
                         <li class="list-group-item"
                             *ngFor="let product of selectedProducts; index as i">
                             <app-order-product [product]="product"
@@ -43,7 +44,7 @@
                     <button *ngIf="selectedProducts.length > 0"
                             type="button"
                             name="confirm"
-                            class="btn btn-outline-primary"
+                            class="btn btn-outline-accent"
                             (click)="onClickHandler($event)"
                             style="float: right; margin-top: 10px;">Confirmar Pedido
                     </button>
@@ -51,17 +52,10 @@
                 <div class="col-12"
                      style="padding-top: 15px;">
                     <h2>Pedidos anteriores</h2>
-                    <ul class="list-group">
+                    <ul class="list-group list-fluid">
                         <li class="list-group-item"
                             *ngFor="let order of historicOrders; index as i">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h5><strong>{{order.id}}</strong></h5>
-                                </div>
-                                <div class="col-4">
-                                    <span class="badge rounded-pill text-bg-primary">{{order.total}} €</span>
-                                </div>
-                            </div>
+                            <app-historic-order [order]="order" (reorder)="reorder($event)"></app-historic-order>
                         </li>
                         <li class="list-group-item"
                             *ngIf="historicOrders.length === 0">No se han encontrado pedidos anteriores</li>

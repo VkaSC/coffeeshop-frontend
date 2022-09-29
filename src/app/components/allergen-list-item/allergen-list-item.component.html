@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-9">
+        <app-allergen-ref [allergen]="allergen" [includeName]="true" [big]="true"></app-allergen-ref>
+    </div>
+    <div class="col-3">
+        <button type="button"
+                name="add"
+                *ngIf="allowAdd"
+                class="btn btn-primary"
+                (click)="onClickHandler($event)"
+                style="float: right;">
+            <img style="pointer-events: none;"
+                 src="../../../assets/img/icons/add.svg">
+        </button>
+        <button type="button"
+                name="remove"
+                *ngIf="allowRemove"
+                class="btn btn-danger"
+                (click)="onClickHandler($event)"
+                style="float: right;">
+            <img style="pointer-events: none;"
+                 src="../../../assets/img/icons/trash.svg">
+        </button>
+    </div>
+</div>

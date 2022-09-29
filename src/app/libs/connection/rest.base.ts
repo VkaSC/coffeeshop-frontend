@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpResponse } from 'src/app/models/httpResponse.model';
+import { StorageService } from 'src/app/services/storage.service';
 import { environment } from 'src/environments/environment';
 import { StrUtils } from '../utils/str.utils';
 import { Utils } from '../utils/utils.utils';
@@ -19,10 +20,11 @@ export interface RestOptions {
 export interface SearchOptions {
     fields?: string[];
     limit?: number;
-    start?: number;
+    page?: number;
     orderBy?: string[];
     order?: 'ASC' | 'DESC';
     expand?: boolean;
+    all?: boolean;
     query?: any;
 }
 
@@ -56,8 +58,8 @@ export class Rest {
             if (options.limit !== undefined) {
                 result.push('limit=' + encodeURIComponent(options.limit))
             }
-            if (options.start !== undefined) {
-                result.push('start=' + encodeURIComponent(options.start))
+            if (options.page !== undefined) {
+                result.push('page=' + encodeURIComponent(options.page))
             }
             if (options.orderBy) {
                 const order = options.order === 'DESC' ? '-' : '+'
@@ -70,6 +72,9 @@ export class Rest {
                 for (const key of Object.keys(options.query)) {
                     result.push(key + '=' + encodeURIComponent(options.query[key]))
                 }
+            }
+            if (options.all !== undefined) {
+                result.push('all=' + encodeURIComponent(String(options.all)))
             }
             value += '?' + result.join('&');
         }

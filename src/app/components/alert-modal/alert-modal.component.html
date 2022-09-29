@@ -1,0 +1,19 @@
+<app-modal #modal
+           [title]="title">
+    <div class="row"
+         style="color: white;">
+        <div class="col-12"
+             *ngIf="message">{{message}}</div>
+    </div>
+    <div footer>
+        <button type="button"
+                class="btn btn-secondary"
+                name="cancel"
+                (click)="onClickHandler($event)">{{cancelLabel}}</button>
+        <button type="button"
+                class="btn btn-{{buttonType}}"
+                name="accept"
+                style="margin-left: 5px;"
+                (click)="onClickHandler($event)">{{acceptLabel}}</button>
+    </div>
+</app-modal>

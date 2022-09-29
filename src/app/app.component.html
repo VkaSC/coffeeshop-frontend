@@ -1,5 +1,6 @@
 <app-header></app-header>
-<main class="bg-dark">
+<main class="bg-dark {{mainStyle}}">
+  <app-alert-modal #alertModal></app-alert-modal>
   <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
   <router-outlet></router-outlet>
 </main>

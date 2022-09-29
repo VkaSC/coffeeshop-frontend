@@ -1,0 +1,84 @@
+<app-modal #modal
+           [title]="title">
+    <form [formGroup]="form">
+        <div class="row mt-3">
+            <div class="col-12 col-md-6 form-floating">
+                <input type="text"
+                       class="form-control"
+                       placeholder="Amparo"
+                       formControlName="name">
+                <label>Nombre</label>
+                <div *ngIf="form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)"
+                     class="text-danger">
+                    <div *ngIf="form.controls.name.errors?.['required']">
+                        El Nombre es obligatorio.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 form-floating">
+                <input type="text"
+                       class="form-control"
+                       placeholder="Sánchez Gómez"
+                       formControlName="lastname">
+                <label>Apellidos</label>
+                <div *ngIf="form.controls.lastname.invalid && (form.controls.lastname.dirty || form.controls.lastname.touched)"
+                     class="text-danger">
+                    <div *ngIf="form.controls.lastname.errors?.['required']">
+                        Los Apellidos son obligatorios.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 form-floating mt-3">
+                <input type="email"
+                       class="form-control"
+                       placeholder="Amparo@email.com"
+                       formControlName="email">
+                <label>Correo Electrónico</label>
+                <div *ngIf="form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)"
+                     class="text-danger">
+                    <div *ngIf="form.controls.email.errors?.['required']">
+                        El Correo Electrónico es obligatorio.
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 form-floating mt-3">
+                <select formControlName="type"
+                        class="form-select">
+                    <option value=""
+                            disabled>Tipo...</option>
+                    <option *ngFor="let type of types"
+                            [value]="type">{{type}}</option>
+                </select>
+                <label>Tipo</label>
+                <div *ngIf="form.controls.type.invalid && (form.controls.type.dirty || form.controls.type.touched)"
+                     class="text-danger">
+                    <div *ngIf="form.controls.type.errors?.['required']">
+                        El tipo de usuario es obligatorio.
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 form-check">
+                <div style="margin-top: 33px; margin-left: 20px;">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           value="active"
+                           formControlName="active">
+                    <label class="form-check-label">Active</label>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div footer>
+        <button type="button"
+                class="btn btn-secondary"
+                name="cancel"
+                (click)="onClickHandler($event)">Cancelar</button>
+        <button type="button"
+                class="btn btn-primary"
+                name="save"
+                *ngIf="!readOnly"
+                [disabled]="form.invalid"
+                (click)="onClickHandler($event)"
+                style="margin-left: 5px;">Guardar</button>
+    </div>
+</app-modal>

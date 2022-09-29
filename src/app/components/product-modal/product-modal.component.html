@@ -1,0 +1,120 @@
+<app-modal #modal
+           [title]="title">
+    <form [formGroup]="form">
+        <div class="row mt-3">
+            <div class="col-12 form-floating">
+                <input type="text"
+                       class="form-control"
+                       placeholder="Café con Leche..."
+                       formControlName="name">
+                <label>Nombre del Producto</label>
+                <div *ngIf="form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)"
+                     class="text-danger">
+                    <div *ngIf="form.controls.name.errors?.['required']">
+                        El Nombre del Producto es obligatorio.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 form-floating mt-3">
+                <select formControlName="type"
+                        class="form-select">
+                    <option value=""
+                            disabled>Grupo...</option>
+                    <option *ngFor="let group of groups"
+                            [value]="group">{{group}}</option>
+                </select>
+                <label>Grupo</label>
+                <div *ngIf="form.controls.type.invalid && (form.controls.type.dirty || form.controls.type.touched)"
+                     class="text-danger">
+                    <div *ngIf="form.controls.type.errors?.['required']">
+                        El Grupo es obligatorio.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 form-floating mt-3">
+                <select formControlName="category"
+                        class="form-select">
+                    <option value=""
+                            disabled>Categoria...</option>
+                    <option *ngFor="let category of categories"
+                            [value]="category">{{category}}</option>
+                </select>
+                <label>Categoría</label>
+                <div *ngIf="form.controls.category.invalid && (form.controls.category.dirty || form.controls.category.touched)"
+                     class="text-danger">
+                    <div *ngIf="form.controls.category.errors?.['required']">
+                        La Categoría es obligatoria.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 form-floating mt-3">
+                <input type="number"
+                       class="form-control"
+                       placeholder="1"
+                       formControlName="price">
+                <label>Precio (€)</label>
+                <div *ngIf="form.controls.price.invalid && (form.controls.price.dirty || form.controls.price.touched)"
+                     class="text-danger">
+                    <div *ngIf="form.controls.price.errors?.['required']">
+                        El Precio es obligatorio.
+                    </div>
+                    <div *ngIf="form.controls.price.errors?.['pattern']">
+                        Sólo se admiten números.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <label class="form-label">Detalles</label>
+                <textarea class="form-control"
+                          rows="3"
+                          formControlName="details"></textarea>
+                <div *ngIf="form.controls.details.invalid && (form.controls.details.dirty || form.controls.details.touched)"
+                     class="text-danger">
+                    <div *ngIf="form.controls.details.errors?.['required']">
+                        Los detalles del producto son obligatorios.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <h3>Alérgenos</h3>
+                <div class="row">
+                    <div class="col-6">
+                        <h4>Disponibles</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item"
+                                *ngFor="let allergen of availableAllergens">
+                                <app-allergen-list-item [allergen]="allergen"
+                                                        [allowAdd]="true"
+                                                        (onAdd)="addAllergen($event)"></app-allergen-list-item>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <h4>Seleccionados</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item"
+                                *ngFor="let allergen of product.allergens">
+                                <app-allergen-list-item [allergen]="allergen"
+                                                        [allowRemove]="true"
+                                                        (onRemove)="removeAllergen($event)"></app-allergen-list-item>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div footer>
+        <button type="button"
+                class="btn btn-secondary"
+                name="cancel"
+                (click)="onClickHandler($event)">Cancelar</button>
+        <button type="button"
+                class="btn btn-primary"
+                name="save"
+                *ngIf="!readOnly"
+                [disabled]="form.invalid"
+                (click)="onClickHandler($event)"
+                style="margin-left: 5px;">Guardar</button>
+    </div>
+</app-modal>

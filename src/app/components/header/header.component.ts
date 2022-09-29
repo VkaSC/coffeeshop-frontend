@@ -27,7 +27,10 @@ export class HeaderComponent implements OnInit {
     this.authService.logout().then(() => {
       this.router.navigate(['']);
       this.authService.authorized = false;
+      this.authService.loggedUser = undefined;
     }).catch((error) => {
+      this.authService.authorized = false;
+      this.authService.loggedUser = undefined;
       if (error.htmlCode === HTMLCodes.FORBIDDEN || error.htmlCode === HTMLCodes.UNAUTHORIZED) {
         this.toastService.error({
           header: 'Sin Autorización',

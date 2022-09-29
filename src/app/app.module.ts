@@ -21,6 +21,21 @@ import { CredentialsComponent } from './pages/credentials/credentials.component'
 import { ActivateComponent } from './pages/activate/activate.component';
 import { RevokeComponent } from './pages/revoke/revoke.component';
 import { AdminBarComponent } from './components/admin-bar/admin-bar.component';
+import { HistoricOrderComponent } from './components/historic-order/historic-order.component';
+import { MillisToEsDatePipe } from './pipes/millis-to-es-date.pipe';
+import { ProductsComponent } from './pages/products/products.component';
+import { AllergensComponent } from './pages/allergens/allergens.component';
+import { UsersComponent } from './pages/users/users.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { ProductModalComponent } from './components/product-modal/product-modal.component';
+import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
+import { AllergenModalComponent } from './components/allergen-modal/allergen-modal.component';
+import { OrdersComponent } from './pages/orders/orders.component';
+import { UserModalComponent } from './components/user-modal/user-modal.component';
+import { BoolValuePipe } from './pipes/bool-value.pipe';
+import { FirstLetterCapPipe } from './pipes/first-letter-cap.pipe';
+import { AllergenRefComponent } from './components/allergen-ref/allergen-ref.component';
+import { AllergenListItemComponent } from './components/allergen-list-item/allergen-list-item.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +54,22 @@ import { AdminBarComponent } from './components/admin-bar/admin-bar.component';
     CredentialsComponent,
     ActivateComponent,
     RevokeComponent,
-    AdminBarComponent
+    AdminBarComponent,
+    HistoricOrderComponent,
+    MillisToEsDatePipe,
+    ProductsComponent,
+    AllergensComponent,
+    UsersComponent,
+    ModalComponent,
+    ProductModalComponent,
+    AlertModalComponent,
+    AllergenModalComponent,
+    OrdersComponent,
+    UserModalComponent,
+    BoolValuePipe,
+    FirstLetterCapPipe,
+    AllergenRefComponent,
+    AllergenListItemComponent
   ],
   imports: [
     BrowserModule,

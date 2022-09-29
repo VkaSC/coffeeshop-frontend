@@ -8,8 +8,6 @@ import User from '../models/user.model';
 import { StorageService } from './storage.service';
 
 const URL = '/api/auth'
-const DEVICE_ID = 'device_id';
-const TOKEN = 'token';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +22,7 @@ export class AuthService extends Rest {
     private storageService: StorageService
   ) {
     super(httpClient);
-    const token = this.storageService.getLocalJson<AuthToken>(TOKEN);
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN);
     if(token){
       this.authorized = true;
       this.loggedUser = new User(token.user);
@@ -44,25 +42,26 @@ export class AuthService extends Rest {
     }, {
       jsonBody: true,
     });
-    this.storageService.setLocalJson(TOKEN, response.result.data);
+    this.storageService.setLocalJson(StorageService.TOKEN, response.result.data);
+    this.loggedUser = new User(response.result.data?.user);
     return response.result.data;
   }
 
   async logout() {
-    const token = this.storageService.getLocalJson<AuthToken>(TOKEN);
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN);
+    this.storageService.removeLocal(StorageService.TOKEN);
     const response = await this.post<AuthToken>(URL + '/logout', {}, {
       authorization: token?.access_token,
     });
-    this.storageService.removeLocal(TOKEN);
     return response.result.data;
   }
 
   async refresh() {
-    const token = this.storageService.getLocalJson<AuthToken>(TOKEN);
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN);
     const response = await this.post<AuthToken>(URL + '/refresh', {}, {
       authorization: token?.access_token,
     });
-    this.storageService.setLocalJson(TOKEN, response.result.data);
+    this.storageService.setLocalJson(StorageService.TOKEN, response.result.data);
     return response.result.data;
   }
 
@@ -100,13 +99,13 @@ export class AuthService extends Rest {
 
 
   createDeviceId(overrite?: boolean) {
-    if (!this.storageService.getLocal(DEVICE_ID) || overrite) {
-      this.storageService.setLocal(DEVICE_ID, Utils.createUUID());
+    if (!this.storageService.getLocal(StorageService.DEVICE_ID) || overrite) {
+      this.storageService.setLocal(StorageService.DEVICE_ID, Utils.createUUID());
     }
   }
 
   getDeviceId() {
     this.createDeviceId();
-    return this.storageService.getLocal(DEVICE_ID) || '';
+    return this.storageService.getLocal(StorageService.DEVICE_ID) || '';
   }
 }
