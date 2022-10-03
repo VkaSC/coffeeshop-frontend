@@ -61,9 +61,24 @@ export class StorageService {
     return null;
   }
 
+  getSessionJson(key: string): string | null {
+    if (this.isSessionStorageSupported() && this.sessionStorage.getItem(key)) {
+      return JSON.parse(this.sessionStorage.getItem(key) || "");
+    }
+    return null;
+  }
+
   setSession(key: string, value: string): boolean {
     if (this.isSessionStorageSupported()) {
       this.sessionStorage.setItem(key, value);
+      return true;
+    }
+    return false;
+  }
+
+  setSessionJson(key: string, value: any): boolean {
+    if (this.isSessionStorageSupported()) {
+      this.sessionStorage.setItem(key, JSON.stringify(value));
       return true;
     }
     return false;

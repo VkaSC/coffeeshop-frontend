@@ -25,11 +25,11 @@ export class AuthService extends Rest {
     const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN);
     if(token){
       this.authorized = true;
-      this.loggedUser = new User(token.user);
+      this.loggedUser = new User(token?.user);
       /*this.refresh().then(() => {
         console.log('Token refreshed');
       }).catch(() => {
-        console.log('Token refreshed');
+        console.log('Token not refreshed');
       });*/
     }
   }
@@ -42,7 +42,11 @@ export class AuthService extends Rest {
     }, {
       jsonBody: true,
     });
-    this.storageService.setLocalJson(StorageService.TOKEN, response.result.data);
+    if(remember){
+      this.storageService.setLocalJson(StorageService.TOKEN, response.result.data);
+    } else {
+      this.storageService.setSessionJson(StorageService.TOKEN, response.result.data);
+    }
     this.loggedUser = new User(response.result.data?.user);
     return response.result.data;
   }
@@ -50,6 +54,7 @@ export class AuthService extends Rest {
   async logout() {
     const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN);
     this.storageService.removeLocal(StorageService.TOKEN);
+    this.storageService.removeSession(StorageService.TOKEN);
     const response = await this.post<AuthToken>(URL + '/logout', {}, {
       authorization: token?.access_token,
     });
@@ -62,6 +67,8 @@ export class AuthService extends Rest {
       authorization: token?.access_token,
     });
     this.storageService.setLocalJson(StorageService.TOKEN, response.result.data);
+    this.authorized = true;
+    this.loggedUser = new User(response.result.data?.user);
     return response.result.data;
   }
 
