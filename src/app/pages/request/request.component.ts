@@ -136,7 +136,6 @@ export class RequestComponent implements OnInit {
           }
           this.productsByCategory[product.category].push(product);
         }
-        console.log(this.productsByCategory);
       }
     }).catch((error) => {
       this.toastService.error({

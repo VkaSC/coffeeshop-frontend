@@ -107,7 +107,6 @@ export class ProductModalComponent implements OnInit {
   setModel(product?: Product) {
     if (product) {
       this.product = new Product(Utils.clone(product));
-      console.log(this.product);
       this.form.controls.name.setValue(this.product.name);
       this.form.controls.category.setValue(this.product.category);
       this.form.controls.type.setValue(this.product.type);

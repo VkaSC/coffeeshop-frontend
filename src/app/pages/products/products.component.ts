@@ -86,7 +86,6 @@ export class ProductsComponent implements OnInit {
       orderBy: ['type', 'category'],
     }).then((productsResult: Product[] | undefined) => {
       this.products = productsResult;
-      console.log(this.products);
     }).catch((error) => {
       this.toastService.error({
         header: 'Error',

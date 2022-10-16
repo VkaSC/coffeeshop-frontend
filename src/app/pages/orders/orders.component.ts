@@ -94,7 +94,6 @@ export class OrdersComponent implements OnInit {
                     }
                 });
                 this.historicOrders = orders || [];
-                console.log(orders);
             }
         } catch (err) {
             const error = err as HttpResponse<Order[]>;

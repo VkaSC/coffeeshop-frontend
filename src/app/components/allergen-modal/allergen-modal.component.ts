@@ -112,7 +112,6 @@ export class AllergenModalComponent implements OnInit {
   setModel(allergen?: Allergen) {
     if (allergen) {
       this.allergen = new Allergen(Utils.clone(allergen));
-      console.log(this.allergen);
       this.form.controls.name.setValue(this.allergen.name);
       this.form.controls.details.setValue(this.allergen.details);
     } else {

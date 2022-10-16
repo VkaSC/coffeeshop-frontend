@@ -88,7 +88,6 @@ export class UserModalComponent implements OnInit {
   setModel(user?: User) {
     if (user) {
       this.user = new User(Utils.clone(user));
-      console.log(this.user);
       this.form.controls.name.setValue(this.user.name);
       this.form.controls.lastname.setValue(this.user.lastName);
       this.form.controls.email.setValue(this.user.email);
