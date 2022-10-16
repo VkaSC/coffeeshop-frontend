@@ -61,7 +61,7 @@ export class StorageService {
     return null;
   }
 
-  getSessionJson(key: string): string | null {
+  getSessionJson<T>(key: string): T | null {
     if (this.isSessionStorageSupported() && this.sessionStorage.getItem(key)) {
       return JSON.parse(this.sessionStorage.getItem(key) || "");
     }

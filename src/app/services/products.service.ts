@@ -17,38 +17,43 @@ export class ProductsService extends Rest {
   }
 
   async listProducts(searchOptions?: SearchOptions): Promise<Product[] | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     const response = await this.get<Product[]>(URL + this.getSearchOptions(searchOptions), {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
     });
     return response.result.data;
   }
 
   async getProduct(productId: string): Promise<Product | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     const response = await this.get<Product>(URL + '/' + productId, {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
     });
     return response.result.data;
   }
 
   async addProduct(product: Product): Promise<Product | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     const response = await this.post<Product>(URL, product, {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
       jsonBody: true,
     });
     return response.result.data;
   }
 
   async updateProduct(product: Product): Promise<Product | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     const response = await this.put<Product>(URL + '/' + product.id, product, {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
       jsonBody: true,
     });
     return response.result.data;
   }
 
   async deleteProduct(product: Product): Promise<Product | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     const response = await this.delete<Product>(URL + '/' + product.id, {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
     });
     return response.result.data;
   }

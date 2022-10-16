@@ -17,30 +17,36 @@ export class AllergensService extends Rest {
   }
 
   async listAllergens(searchOptions?: SearchOptions): Promise<Allergen[] | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
+    console.log(token);
     const response = await this.get<Allergen[]>(URL + this.getSearchOptions(searchOptions), {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
     });
     return response.result.data;
   }
 
   async getAllergen(allergenId: string): Promise<Allergen | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     const response = await this.get<Allergen>(URL + '/' + allergenId, {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
     });
     return response.result.data;
   }
 
   async addAllergen(allergen: Allergen): Promise<Allergen | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
+    console.log(token);
     const response = await this.post<Allergen>(URL, allergen, {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
       jsonBody: true,
     });
     return response.result.data;
   }
 
   async updateAllergen(allergen: Allergen): Promise<Allergen | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     const response = await this.put<Allergen>(URL + '/' + allergen.id, allergen, {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
       jsonBody: true,
     });
     return response.result.data;

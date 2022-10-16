@@ -17,38 +17,43 @@ export class UsersService extends Rest {
   }
 
   async listUsers(searchOptions?: SearchOptions): Promise<User[] | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     const response = await this.get<User[]>(URL + this.getSearchOptions(searchOptions), {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
     });
     return response.result.data;
   }
 
   async getUser(userId: string): Promise<User | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     const response = await this.get<User>(URL + '/' + userId, {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
     });
     return response.result.data;
   }
 
   async addUser(user: User): Promise<User | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     const response = await this.post<User>(URL, user, {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
       jsonBody: true,
     });
     return response.result.data;
   }
 
   async updateUser(user: User): Promise<User | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     const response = await this.put<User>(URL + '/' + user.id, user, {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
       jsonBody: true,
     });
     return response.result.data;
   }
 
   async deleteUser(user: User): Promise<User | undefined> {
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     const response = await this.delete<User>(URL + '/' + user.id, {
-      authorization: this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN)?.access_token,
+      authorization: token?.access_token,
     });
     return response.result.data;
   }

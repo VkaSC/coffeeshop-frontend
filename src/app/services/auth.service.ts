@@ -52,7 +52,7 @@ export class AuthService extends Rest {
   }
 
   async logout() {
-    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN);
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     this.storageService.removeLocal(StorageService.TOKEN);
     this.storageService.removeSession(StorageService.TOKEN);
     const response = await this.post<AuthToken>(URL + '/logout', {}, {
@@ -62,7 +62,7 @@ export class AuthService extends Rest {
   }
 
   async refresh() {
-    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN);
+    const token = this.storageService.getLocalJson<AuthToken>(StorageService.TOKEN) || this.storageService.getSessionJson<AuthToken>(StorageService.TOKEN);
     const response = await this.post<AuthToken>(URL + '/refresh', {}, {
       authorization: token?.access_token,
     });
