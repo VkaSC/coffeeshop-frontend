@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DialogMode } from 'src/app/components/modal/modal.component';
+import { OrderModalComponent } from 'src/app/components/order-modal/order-modal.component';
 import DateUtils from 'src/app/libs/utils/date.utils';
 import { HTMLCodes, HttpResponse } from 'src/app/models/httpResponse.model';
 import Order from 'src/app/models/order.model';
@@ -17,6 +19,7 @@ const MINUTES_LIMIT = 15;
 })
 export class OrdersComponent implements OnInit {
 
+    @ViewChild('orderModal') private orderModal?: OrderModalComponent
     todayOrders: Order[] = [];
     productsCount: {
         [key: number]: {
@@ -112,7 +115,7 @@ export class OrdersComponent implements OnInit {
     }
 
     view(order: Order) {
-
+        this.orderModal?.open(DialogMode.View, order);
     }
 
 }

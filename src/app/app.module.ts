@@ -36,6 +36,8 @@ import { BoolValuePipe } from './pipes/bool-value.pipe';
 import { FirstLetterCapPipe } from './pipes/first-letter-cap.pipe';
 import { AllergenRefComponent } from './components/allergen-ref/allergen-ref.component';
 import { AllergenListItemComponent } from './components/allergen-list-item/allergen-list-item.component';
+import { OrderModalComponent } from './components/order-modal/order-modal.component';
+import { OrderLineListItemComponent } from './components/order-line-list-item/order-line-list-item.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import { AllergenListItemComponent } from './components/allergen-list-item/aller
     BoolValuePipe,
     FirstLetterCapPipe,
     AllergenRefComponent,
-    AllergenListItemComponent
+    AllergenListItemComponent,
+    OrderModalComponent,
+    OrderLineListItemComponent
   ],
   imports: [
     BrowserModule,
